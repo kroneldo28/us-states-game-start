@@ -15,11 +15,17 @@ correct_guesses = []
 # We loop until we have all the states found
 while len(correct_guesses) < 50:
     user_answer = screen.textinput(prompt="Guess a State", title=f"{len(correct_guesses)}/50 correct guesses").title()
+    # if user_answer == "Exit":
+    #     missing_states = []
+    #     for state in states:
+    #         if state not in correct_guesses:
+    #             missing_states.append(state)
+    #     new_dataframe = pandas.DataFrame(missing_states)
+    #     new_dataframe.to_csv("missing_states.csv")
+    #     break
+    # Using List Comprehension below
     if user_answer == "Exit":
-        missing_states = []
-        for state in states:
-            if state not in correct_guesses:
-                missing_states.append(state)
+        missing_states = [state for state in states if state not in correct_guesses]
         new_dataframe = pandas.DataFrame(missing_states)
         new_dataframe.to_csv("missing_states.csv")
         break
